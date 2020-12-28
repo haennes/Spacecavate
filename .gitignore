@@ -1,0 +1,6 @@
+.import/
+.vs/
+.vscode/
+bin/
+export.cfg
+exportpresets.cfg
