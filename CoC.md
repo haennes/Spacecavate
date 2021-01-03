@@ -15,7 +15,7 @@
 9. We must try to implement custom game functionality in GDScript as it is portable without hassle between all platforms supported by Godot.
 10. When performance of code is issue we must first try to optimize GDScript (why look at 9). If it wont solve problem then we will use GDNative (Rust/C++ preffered).
 11. We wont use Singleton (Autolad) for game state, instead we will use shared resource as an inject dependency to all scenes that require that kind of data.
-12. Godot doesn't have stucts, we will use Resources instead.
+12. Godot doesn't have structs, we will use Resources instead.
 13. Artists will separate their raw (project) files from production files to different folders. Blender (*.blend) files shouldn't be in the same folder as files exported from 3d software. We can have "raw_assetes" folder for files used by artists and "assets" folder that is used by game internally.
 
 Any suggestions?
