@@ -1,25 +1,50 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Player/TargetIcon.png" type="Texture" id=2]
+[ext_resource path="res://resources/CameraData/CameraData.gd" type="Script" id=3]
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+offset = Vector3( 0, 0, 0 )
+
+[sub_resource type="CapsuleShape" id=2]
 height = 2.0
 
-[sub_resource type="CapsuleMesh" id=2]
+[sub_resource type="CapsuleMesh" id=3]
 mid_height = 2.0
 
 [node name="Player" type="KinematicBody"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource( 1 )
+camera_data = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.999997, 0.00229287, -6.04718e-05, 7.40722e-05, -0.00592443, 0.999982, 0.00229247, -0.99998, -0.00592458, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-mesh = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.521, 0 )
 current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
