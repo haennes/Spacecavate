@@ -2,7 +2,7 @@ extends RigidBody
 
 ##### Declare this in an Autoload later   (from)
 
-var G := 0.6
+var G := 6.0 # this is nonsense rn sorry
 
 ##### Declare this in an Autoload later   (to)
 
