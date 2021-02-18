@@ -24,7 +24,7 @@ var atmosphere_color_curve := Curve2D.new()
 
 func _ready():
 	print(0.000000667)
-	add_to_group("GravityObjects")
+	add_to_group("gravity_objects")
 	set_velocity(starting_velocity)
 	if !affected_by_gravity:
 		mode = MODE_STATIC
@@ -49,15 +49,15 @@ func _physics_process(delta):
 func _integrate_gravity(state) -> void :
 	if mode != MODE_STATIC:
 		var force = Vector3.ZERO
-		var GravityObjects = get_tree().get_nodes_in_group("GravityObjects")
-		for x in GravityObjects.size():
-			var GravityObject : RigidBody = GravityObjects[x]
-			if GravityObject == self:
+		var gravity_objects = get_tree().get_nodes_in_group("gravity_objects")
+		for x in gravity_objects.size():
+			var gravity_object : RigidBody = gravity_objects[x]
+			if gravity_object == self:
 				continue
-			var direction = translation.direction_to(GravityObject.translation)
-			var squaredistance = translation.distance_squared_to(GravityObject.translation)
-			force += direction * G * GravityObject.mass * mass / squaredistance
-			#print("x : %s dir : %s squaredistance : %s force : %s" % [x,direction,squaredistance,force])
+			var direction = translation.direction_to(gravity_object.translation)
+			var squaredistance = translation.distance_squared_to(gravity_object.translation)
+			force += direction * G * gravity_object.mass * mass / squaredistance
+			#print("x : %s dir : %s squaredistance : %s force : %s" % [x, direction, squaredistance, force])
 		add_central_force(force)
 
 
@@ -66,23 +66,23 @@ func calculate_next_position(delta : float) -> void:
 	var stringToPrint : String = ""
 	if mode != MODE_STATIC:
 		var acceleration = Vector3.ZERO
-		var GravityObjects = get_tree().get_nodes_in_group("GravityObjects")
-		for x in GravityObjects.size():
-			var GravityObject : RigidBody = GravityObjects[x]
-			if GravityObject == self:
+		var gravity_objects = get_tree().get_nodes_in_group("gravity_objects")
+		for x in gravity_objects.size():
+			var gravity_object : RigidBody = gravity_objects[x]
+			if gravity_object == self:
 				continue
-			var direction = position_array[-1].direction_to(GravityObject.position_array[-1])
-			var squaredistance = position_array[-1].distance_squared_to(GravityObject.position_array[-1])
+			var direction = position_array[-1].direction_to(gravity_object.position_array[-1])
+			var squaredistance = position_array[-1].distance_squared_to(gravity_object.position_array[-1])
 			stringToPrint += "dir: " + String(direction) + "squaredistance: " + String(squaredistance)
-			acceleration += direction*G*GravityObject.mass / squaredistance
-		#posn = position_array[-1] + velocity * delta + 1/2 * acceleration * delta * delta #more accurate
+			acceleration += direction*G*gravity_object.mass / squaredistance
 		velocity += acceleration * delta
-		posn = position_array[-1] + velocity * delta #more accurate
+		posn = position_array[-1] + velocity * delta
 		stringToPrint += "acceleration: " + String(acceleration) + "posn: " + String(posn) + "lastpos: " + String(position_array[-1]) + "pos_array_lenght" + String(position_array.size())
 	#print(stringToPrint)
 
 
 func update_posarray(i : int) -> void:
+	print("update_posarray() called")
 	if mode != MODE_STATIC:
 		position_array.append(posn)
 		

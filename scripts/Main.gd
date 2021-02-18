@@ -4,7 +4,8 @@ extends Spatial
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
-	var gravity_emitters = get_tree().get_nodes_in_group("GravityObjects")
+	var gravity_emitters = get_tree().get_nodes_in_group("gravity_objects")
+	print("processcalled")
 	for i in 545:
 		for b in gravity_emitters.size():
 			gravity_emitters[b].calculate_next_position(0.01)

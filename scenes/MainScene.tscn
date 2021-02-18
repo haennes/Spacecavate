@@ -27,7 +27,5 @@ affected_by_gravity = false
 transform = Transform( 1, 0, 0, 0, -0.00345576, 0.999994, 0, -0.999994, -0.00345576, 0, 46.884, 0 )
 fov = 96.2583
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="."]
 multimesh = SubResource( 2 )
