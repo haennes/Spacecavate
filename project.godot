@@ -126,6 +126,11 @@ run={
 3d_physics/layer_1="World"
 3d_physics/layer_2="Player"
 
+[physics]
+
+3d/default_linear_damp=0.0
+3d/default_angular_damp=0.0
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
