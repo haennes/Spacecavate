@@ -1,3 +1,4 @@
+class_name GravityObject
 extends RigidBody
 
 ##### Declare this in an Autoload later   (from)
@@ -51,7 +52,7 @@ func _integrate_gravity(state) -> void :
 		var force = Vector3.ZERO
 		var gravity_objects = get_tree().get_nodes_in_group("gravity_objects")
 		for x in gravity_objects.size():
-			var gravity_object : RigidBody = gravity_objects[x]
+			var gravity_object : GravityObject = gravity_objects[x]
 			if gravity_object == self:
 				continue
 			var direction = translation.direction_to(gravity_object.translation)

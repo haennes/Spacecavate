@@ -11,7 +11,7 @@ const INF_INERTIA := false
 const MAX_CAMERA_TILT := 90
 
 # Data from this resource will be used for implementation of third person camera
-#export(Resource) var camera_data = camera_data as CameraData
+# export(Resource) var camera_data = camera_data as CameraData
 
 export(float, 0, 5) var walk_speed := 10.0
 export(float, 0, 500) var walk_acceleration := 250.0

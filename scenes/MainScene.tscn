@@ -24,7 +24,7 @@ mass = 21113.6
 affected_by_gravity = false
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.00345576, 0.999994, 0, -0.999994, -0.00345576, 0, 46.884, 0 )
+transform = Transform( 1, 0, 0, 0, -0.00345576, 0.999994, 0, -0.999994, -0.00345576, 0, 86.8721, 0 )
 fov = 96.2583
 
 [node name="MultiMeshInstance" type="MultiMeshInstance" parent="."]

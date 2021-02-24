@@ -9,13 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "GravityObject",
+"class": "Engine",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/Engine/Engine.gd"
+}, {
+"base": "RigidBody",
+"class": "GravityObject",
+"language": "GDScript",
+"path": "res://scripts/GravityObject/GravityObject.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/Player/Player.gd"
+}, {
+"base": "GravityObject",
+"class": "Rocket",
+"language": "GDScript",
+"path": "res://scripts/Rocket/Rocket.gd"
 } ]
 _global_script_class_icons={
-"Player": ""
+"Engine": "",
+"GravityObject": "",
+"Player": "",
+"Rocket": ""
 }
 
 [application]
