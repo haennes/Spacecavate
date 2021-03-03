@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Rocket/Rocket.gd" type="Script" id=2]
+
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
+}
+
+[node name="Rocket" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9301, 0, 3.62077 )
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 5 )
