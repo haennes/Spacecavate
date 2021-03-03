@@ -52,9 +52,9 @@ func _integrate_gravity(state) -> void :
 		var force = Vector3.ZERO
 		var gravity_objects = get_tree().get_nodes_in_group("gravity_objects")
 		for x in gravity_objects.size():
-			var gravity_object : GravityObject = gravity_objects[x]
-			if gravity_object == self:
+			if gravity_objects[x] == self:
 				continue
+			var gravity_object : GravityObject = gravity_objects[x]
 			var direction = translation.direction_to(gravity_object.translation)
 			var squaredistance = translation.distance_squared_to(gravity_object.translation)
 			force += direction * G * gravity_object.mass * mass / squaredistance

@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "GravityObject",
+"base": "Part",
 "class": "Engine",
 "language": "GDScript",
 "path": "res://scripts/RocketParts/Engine/Engine.gd"
@@ -19,12 +19,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/GravityObject/GravityObject.gd"
 }, {
+"base": "GravityObject",
+"class": "Part",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/parts.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/Player/Player.gd"
 }, {
-"base": "GravityObject",
+"base": "Spatial",
 "class": "Rocket",
 "language": "GDScript",
 "path": "res://scripts/Rocket/Rocket.gd"
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Engine": "",
 "GravityObject": "",
+"Part": "",
 "Player": "",
 "Rocket": ""
 }
