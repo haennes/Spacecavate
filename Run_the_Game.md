@@ -1,5 +1,5 @@
 
-1. Download Godot from (godotengine.org/downloads)
+1. Download Godot from (https://godotengine.org/download)
 2. Download the github repo (https://github.com/haennes/Spacecavate/archive/main.zip)
 3. Extract the zip (If you dont know how to do it you can find many tutorials on the internet)
 4. Open Godot
