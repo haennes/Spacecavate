@@ -27,8 +27,6 @@ func _ready():
 	print(0.000000667)
 	add_to_group("gravity_objects")
 	set_velocity(starting_velocity)
-	if !affected_by_gravity:
-		mode = MODE_STATIC
 	position_array.append(self.translation)
 
 
@@ -48,7 +46,7 @@ func _physics_process(delta):
 
 
 func _integrate_gravity(state) -> void :
-	if mode != MODE_STATIC:
+	if mode != MODE_STATIC and affected_by_gravity:
 		var force = Vector3.ZERO
 		var gravity_objects = get_tree().get_nodes_in_group("gravity_objects")
 		for x in gravity_objects.size():

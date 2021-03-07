@@ -16,7 +16,6 @@ var part_categories := ["Engine","Tank"] # and so on
 ##### Declare this in an Autoload later   (to)
 
 func _ready():
-	add_to_group("gravity_objects")
 	set_velocity(starting_velocity)
 	position_array.append(self.translation)
 
@@ -27,12 +26,6 @@ func set_velocity(_velocity : Vector3) -> void:
 func _register_all_parts():
 	for i in part_categories.size():
 		_register_all_parts_from_category(part_categories[i],self)
-
-func _integrate_engine_forces():
-	var engines = get_tree().get_nodes_in_group("Engine" + ROCKET_NAME)
-	for i in engines.size():
-		var engine : Engine = engines[i]
-		Engine.integrate_thrust()
 
 
 func _delete_parts_in_group(part_group_name : String):

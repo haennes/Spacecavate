@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 [node name=" GravityObject" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 48.0024 )
 mass = 65535.0
-starting_velocity = Vector3( 50, 0, 0 )
+starting_velocity = Vector3( 30, 0, 0 )
 
 [node name=" GravityObject2" parent="." instance=ExtResource( 1 )]
 mass = 21113.6
