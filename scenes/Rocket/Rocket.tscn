@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/RocketParts/Engines/EngineTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Rocket/Rocket.gd" type="Script" id=2]
 [ext_resource path="res://scenes/RocketParts/FuelTanks/FuelTank.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Rocket/DebugConfigureRocket.gd" type="Script" id=4]
+[ext_resource path="res://scenes/RocketParts/RCSThruster/RCSThrusterTemplate.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve3D" id=1]
 _data = {
@@ -13,10 +14,10 @@ _data = {
 
 [sub_resource type="BoxShape" id=2]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=3]
 
-[sub_resource type="CubeMesh" id=3]
-material = SubResource( 4 )
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
 
 [node name="Rocket" type="Spatial"]
 script = ExtResource( 2 )
@@ -25,15 +26,10 @@ script = ExtResource( 2 )
 curve = SubResource( 1 )
 
 [node name="Engine" parent="." instance=ExtResource( 1 )]
-custom_integrator = true
-
-[node name="Camera" type="Camera" parent="Engine"]
-transform = Transform( -0.0469007, -0.250786, 0.966906, -0.0121503, 0.968043, 0.250491, -0.998826, 3.54297e-08, -0.048449, 8.34148, 2.49623, 0.247323 )
-script = ExtResource( 4 )
+transform = Transform( 0.998632, 0.0255307, 0.0456343, -0.0216476, 0.99626, -0.0836478, -0.0475992, 0.0825455, 0.99545, 0, 0.609066, 0 )
 
 [node name="Tank" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-custom_integrator = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.78437, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2.94602, 0 )
@@ -42,5 +38,12 @@ transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2.94602, 0 )
 shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.0530158, 0, 0.998594, 0, 1, 0, -0.998594, 0, -0.0530158, 17.8246, 3.58813, 0.247323 )
+script = ExtResource( 4 )
+
+[node name="RigidBody" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72157, 7.95536, 2.72123 )

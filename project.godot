@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://scripts/Player/Player.gd"
 }, {
 "base": "Spatial",
+"class": "RCSThruster",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/RCSThruster/RCSThruster.gd"
+}, {
+"base": "Spatial",
 "class": "Rocket",
 "language": "GDScript",
 "path": "res://scripts/Rocket/Rocket.gd"
@@ -44,6 +49,7 @@ _global_script_class_icons={
 "GravityObject": "",
 "Part": "",
 "Player": "",
+"RCSThruster": "",
 "Rocket": "",
 "Tank": ""
 }
@@ -146,6 +152,26 @@ run={
 fire_engine={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_forward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_backward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 
