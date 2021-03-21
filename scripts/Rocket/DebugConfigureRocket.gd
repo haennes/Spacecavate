@@ -35,12 +35,12 @@ func _input(event):
 		
 	if event.is_action_pressed("rcs_backward",true):
 		rcs.fire_thrusters_global(Vector3.BACK,1.0)
-		rcs2.fire_thrusters_global(Vector3.FORWARD,1.0)
+		rcs2.fire_thrusters_global(Vector3.BACK,1.0)
 		print("rcs_backwards")
 		
 	elif event.is_action_pressed("rcs_forward",true):
 		rcs.fire_thrusters_global(Vector3.FORWARD,1.0)
-		rcs2.fire_thrusters_global(Vector3.BACK,1.0)
+		rcs2.fire_thrusters_global(Vector3.FORWARD,1.0)
 		print("rcs_forwards")
 		
 		

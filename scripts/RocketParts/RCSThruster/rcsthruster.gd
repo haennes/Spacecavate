@@ -63,11 +63,11 @@ func _integrate_forces(state):
 	
 
 func _integrate_thruster_forces(state):
-	var thruster_pos_x_force = thruster_force * thruster_pos_x_percentage * thruster_pos_x.global_transform.basis.inverse().y.normalized()
-	var thruster_pos_y_force = thruster_force * thruster_pos_y_percentage * thruster_pos_y.global_transform.basis.inverse().y.normalized()
-	var thruster_neg_y_force = thruster_force * thruster_neg_y_percentage *thruster_neg_y.global_transform.basis.inverse().y.normalized()
-	var thruster_pos_z_force = thruster_force * thruster_pos_z_percentage * thruster_pos_z.global_transform.basis.inverse().y.normalized()
-	var thruster_neg_z_force = thruster_force * thruster_neg_z_percentage *thruster_neg_z.global_transform.basis.inverse().y.normalized()
+	var thruster_pos_x_force = thruster_force * thruster_pos_x_percentage * thruster_pos_x.global_transform.basis.y.normalized()
+	var thruster_pos_y_force = thruster_force * thruster_pos_y_percentage * thruster_pos_y.global_transform.basis.y.normalized()
+	var thruster_neg_y_force = thruster_force * thruster_neg_y_percentage *thruster_neg_y.global_transform.basis.y.normalized()
+	var thruster_pos_z_force = thruster_force * thruster_pos_z_percentage * thruster_pos_z.global_transform.basis.y.normalized()
+	var thruster_neg_z_force = thruster_force * thruster_neg_z_percentage *thruster_neg_z.global_transform.basis.y.normalized()
 
 	
 	print(thruster_pos_x_force,thruster_pos_y_force, thruster_neg_y_force,thruster_pos_z_force,thruster_neg_z_force)
