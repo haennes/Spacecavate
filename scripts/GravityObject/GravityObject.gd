@@ -81,7 +81,7 @@ func calculate_next_position(delta : float) -> void:
 
 
 func update_posarray(i : int) -> void:
-	print("update_posarray() called")
+	print("update_posarray() called" + name)
 	if mode != MODE_STATIC:
 		position_array.append(posn)
 		

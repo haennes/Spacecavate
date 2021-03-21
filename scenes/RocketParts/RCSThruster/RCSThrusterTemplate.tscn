@@ -1,55 +1,122 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/RocketParts/Engines/EngineTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/RocketParts/RCSThruster/RCSThruster.gd" type="Script" id=2]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxShape" id=1]
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="CubeMesh" id=2]
 
-[node name="RigidBody" type="Spatial"]
+[sub_resource type="CylinderShape" id=3]
+
+[sub_resource type="CylinderMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=6]
+
+[sub_resource type="ParticlesMaterial" id=7]
+next_pass = SubResource( 6 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3( 0, 0, 0 )
+
+[sub_resource type="SphereMesh" id=8]
+radius = 0.3
+height = 0.3
+
+[node name="RigidBody" type="RigidBody"]
 script = ExtResource( 2 )
 
-[node name="Engine" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+[node name="Mainbox2" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
 
-[node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="Engine"]
-nodes/node_a = NodePath("..")
-nodes/node_b = NodePath("../..")
-
-[node name="Engine2" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 2, 0, 0 )
-
-[node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="Engine2"]
-nodes/node_a = NodePath("..")
-nodes/node_b = NodePath("../..")
-
-[node name="Engine3" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, -2, 0, 0 )
-
-[node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="Engine3"]
-nodes/node_a = NodePath("..")
-nodes/node_b = NodePath("../..")
-
-[node name="Engine4" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1, -3.25841e-07, 0, 3.25841e-07, -1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="Engine4"]
-nodes/node_a = NodePath("..")
-nodes/node_b = NodePath("../..")
-
-[node name="Engine5" parent="." instance=ExtResource( 1 )]
-transform = Transform( 2.65431e-14, -1.62921e-07, 1, -1, -1.62921e-07, 0, 1.62921e-07, -1, -1.62921e-07, 0, 0, 2 )
-
-[node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="Engine5"]
-nodes/node_a = NodePath("..")
-nodes/node_b = NodePath("../..")
-
-[node name="RigidBody" type="RigidBody" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
-mesh = SubResource( 1 )
+[node name="Mainbox" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
 material/0 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
-shape = SubResource( 2 )
+[node name="Thruster-y" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+shape = SubResource( 3 )
+
+[node name="Thruster-y2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Thruster-y3" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+material_override = SubResource( 5 )
+speed_scale = 33.0
+visibility_aabb = AABB( -1.46633, -1.1403, -1.29407, 2.93265, 2.28059, 2.58814 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="Thruster+z" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 2 )
+shape = SubResource( 3 )
+
+[node name="Thruster+z2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 2 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Thruster+z3" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4 )
+material_override = SubResource( 5 )
+speed_scale = 33.0
+visibility_aabb = AABB( -1.46633, -1.1403, -1.29407, 2.93265, 2.28059, 2.58814 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="Thruster-z" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, -2 )
+shape = SubResource( 3 )
+
+[node name="Thruster-z2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, -2 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Thruster-z3" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+material_override = SubResource( 5 )
+speed_scale = 33.0
+visibility_aabb = AABB( -1.46633, -1.1403, -1.29407, 2.93265, 2.28059, 2.58814 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="Thruster+y" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 0, 2, 0 )
+shape = SubResource( 3 )
+
+[node name="Thruster+y2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 0, 2, 0 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Thruster+y3" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+material_override = SubResource( 5 )
+speed_scale = 33.0
+visibility_aabb = AABB( -1.46633, -1.1403, -1.29407, 2.93265, 2.28059, 2.58814 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="Thruster+x" type="CollisionShape" parent="."]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 2, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="Thruster+x2" type="MeshInstance" parent="."]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 2, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Thruster+x3" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+material_override = SubResource( 5 )
+speed_scale = 33.0
+visibility_aabb = AABB( -1.46633, -1.1403, -1.29407, 2.93265, 2.28059, 2.58814 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="Joint" type="Generic6DOFJoint" parent="."]
