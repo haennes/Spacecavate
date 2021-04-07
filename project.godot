@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/RocketParts/Engine/Engine.gd"
 }, {
+"base": "Part",
+"class": "FuelTank",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/FuelTank/FuelTank.gd"
+}, {
 "base": "RigidBody",
 "class": "GravityObject",
 "language": "GDScript",
@@ -39,13 +44,14 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Rocket/Rocket.gd"
 }, {
-"base": "Part",
+"base": "Resource",
 "class": "Tank",
 "language": "GDScript",
-"path": "res://scripts/RocketParts/FuelTank/FuelTank.gd"
+"path": "res://scripts/RocketParts/FuelTank/Tank.gd"
 } ]
 _global_script_class_icons={
 "Engine": "",
+"FuelTank": "",
 "GravityObject": "",
 "Part": "",
 "Player": "",

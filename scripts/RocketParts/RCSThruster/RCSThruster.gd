@@ -70,7 +70,7 @@ func _integrate_thruster_forces(state):
 	var thruster_neg_z_force = thruster_force * thruster_neg_z_percentage *thruster_neg_z.global_transform.basis.y.normalized()
 
 	
-	print(thruster_pos_x_force,thruster_pos_y_force, thruster_neg_y_force,thruster_pos_z_force,thruster_neg_z_force)
+	#print(thruster_pos_x_force,thruster_pos_y_force, thruster_neg_y_force,thruster_pos_z_force,thruster_neg_z_force)
 	add_force(thruster_pos_x_force,thruster_pos_x.translation)
 	add_force(thruster_pos_y_force,thruster_pos_y.translation)
 	add_force(thruster_neg_y_force,thruster_neg_y.translation)
@@ -80,8 +80,8 @@ func _integrate_thruster_forces(state):
 	get_node("Thruster+x3").emitting = bool(thruster_pos_x_percentage)
 	get_node("Thruster+y3").emitting = bool(thruster_pos_y_percentage)
 	get_node("Thruster-y3").emitting = bool(thruster_neg_y_percentage)
-	get_node("Thruster+z3").emitting = bool(thruster_pos_z_percentage)
-	get_node("Thruster-z3").emitting = bool(thruster_neg_z_percentage)
+	get_node("Thruster-z3").emitting = bool(thruster_pos_z_percentage)
+	get_node("Thruster+z3").emitting = bool(thruster_neg_z_percentage)
 
 func _register_thrusters():
 	thruster_pos_x = get_node("Thruster+x")

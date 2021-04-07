@@ -7,7 +7,7 @@ var rcs
 var rcs2
 
 func _ready():
-	rocket = get_parent().get_parent()
+	rocket = get_parent().get_node("Rocket")
 	tank = rocket.get_node("Tank")
 	engine = rocket.get_node("Engine")
 	rcs = rocket.get_node("RCS")
@@ -17,8 +17,8 @@ func _ready():
 func _link_parts():
 	rcs.scale_childs(Vector3(0.2,0.2,0.2))
 	rcs2.scale_childs(Vector3(0.2,0.2,0.2))
-	tank.add_fuel(50000,"Oxygen")
-	tank.add_fuel(50000,"Hydrogen")
+	tank.add_fuel_auto(500,"Oxygen")
+	tank.add_fuel_auto(1000,"Hydrogen")
 	tank.get_node("Joint").set_node_a(tank.get_path())
 	tank.get_node("Joint").set_node_b(engine.get_path())
 	rcs.get_node("Joint").set_node_a(rcs.get_path())
@@ -68,4 +68,4 @@ func _input(event):
 	else:
 		rcs.fire_thrusters_global(Vector3.ZERO,1.0)
 		rcs2.fire_thrusters_global(Vector3.ZERO,1.0)
-		print("rcs_reset")
+		#print("rcs_reset")
