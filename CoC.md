@@ -9,7 +9,7 @@
 4. All constants must be written in capital lettesr just like members of Enum types:
 	const DUMMY_CONSTANT := 0
 5. File names are using naming conventions from point 2.
-6. Numbers must be separated by comma nad space which means Vector2(1,1) should be written as Vector2(1, 1) or in case of Godot use built in constant: Vector2.ONE
+6. Numbers must be separated by comma and space which means Vector2(1,1) should be written as Vector2(1, 1) or in case of Godot use built in constant: Vector2.ONE
 7. Every mathematical operator must be separated by space instead of 2+2=4 write 2 + 2 = 4 or 6 / 2 = 3
 8. We must always default to built in engine futures before implementing our own in GDScript. Engine build in functions are driven by C++ and are extremely fast.
 9. We must try to implement custom game functionality in GDScript as it is portable without hassle between all platforms supported by Godot.
@@ -17,5 +17,8 @@
 11. We wont use Singleton (Autolad) for game state, instead we will use shared resource as an inject dependency to all scenes that require that kind of data.
 12. Godot doesn't have structs, we will use Resources instead.
 13. Artists will separate their raw (project) files from production files to different folders. Blender (*.blend) files shouldn't be in the same folder as files exported from 3d software. We can have "raw_assetes" folder for files used by artists and "assets" folder that is used by game internally.
+
+
+14. Node "Pointers" / References shouldnt be stored in arrays (only for iterating purposes) -> use groups instead (https://docs.godotengine.org/en/stable/classes/class_scenetree.html?highlight=group) 
 
 Any suggestions?
