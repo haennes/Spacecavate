@@ -1,3 +1,4 @@
+class_name GravityObject
 extends RigidBody
 
 ##### Declare this in an Autoload later   (from)
@@ -26,8 +27,6 @@ func _ready():
 	print(0.000000667)
 	add_to_group("gravity_objects")
 	set_velocity(starting_velocity)
-	if !affected_by_gravity:
-		mode = MODE_STATIC
 	position_array.append(self.translation)
 
 
@@ -47,13 +46,13 @@ func _physics_process(delta):
 
 
 func _integrate_gravity(state) -> void :
-	if mode != MODE_STATIC:
+	if mode != MODE_STATIC and affected_by_gravity:
 		var force = Vector3.ZERO
 		var gravity_objects = get_tree().get_nodes_in_group("gravity_objects")
 		for x in gravity_objects.size():
-			var gravity_object : RigidBody = gravity_objects[x]
-			if gravity_object == self:
+			if gravity_objects[x] == self:
 				continue
+			var gravity_object : GravityObject = gravity_objects[x]
 			var direction = translation.direction_to(gravity_object.translation)
 			var squaredistance = translation.distance_squared_to(gravity_object.translation)
 			force += direction * G * gravity_object.mass * mass / squaredistance
@@ -82,7 +81,7 @@ func calculate_next_position(delta : float) -> void:
 
 
 func update_posarray(i : int) -> void:
-	print("update_posarray() called")
+	print("update_posarray() called" + name)
 	if mode != MODE_STATIC:
 		position_array.append(posn)
 		

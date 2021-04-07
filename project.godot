@@ -9,25 +9,60 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
-"class": "CameraData",
+"base": "Part",
+"class": "Engine",
 "language": "GDScript",
-"path": "res://resources/CameraData/CameraData.gd"
+"path": "res://scripts/RocketParts/Engine/Engine.gd"
+}, {
+"base": "Part",
+"class": "FuelTank",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/FuelTank/FuelTank.gd"
+}, {
+"base": "RigidBody",
+"class": "GravityObject",
+"language": "GDScript",
+"path": "res://scripts/GravityObject/GravityObject.gd"
+}, {
+"base": "GravityObject",
+"class": "Part",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/parts.gd"
 }, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/Player/Player.gd"
+}, {
+"base": "Part",
+"class": "RCSThruster",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/RCSThruster/RCSThruster.gd"
+}, {
+"base": "Spatial",
+"class": "Rocket",
+"language": "GDScript",
+"path": "res://scripts/Rocket/Rocket.gd"
+}, {
+"base": "Resource",
+"class": "Tank",
+"language": "GDScript",
+"path": "res://scripts/RocketParts/FuelTank/Tank.gd"
 } ]
 _global_script_class_icons={
-"CameraData": "",
-"Player": ""
+"Engine": "",
+"FuelTank": "",
+"GravityObject": "",
+"Part": "",
+"Player": "",
+"RCSThruster": "",
+"Rocket": "",
+"Tank": ""
 }
 
 [application]
 
 config/name="Spacecavate"
-run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 config/version="0.1.0"
 
@@ -116,6 +151,41 @@ jump={
  ]
 }
 run={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+fire_engine={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_forward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_backward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+rcs_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
