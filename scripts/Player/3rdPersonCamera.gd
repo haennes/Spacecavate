@@ -19,13 +19,15 @@ func get_mode():
 	return current_camera_mode
 
 func change_mode():
+	print("change_mode")
 	if current_camera_mode == CameraMode._3RD_PERSON:
 		current_camera_mode = CameraMode.FIRST_PERSON
 	else:
 		current_camera_mode = CameraMode._3RD_PERSON
+	update_camera()
 
 func update_camera():
-	if current_camera_mode == CameraMode.FIRSTPERSON:
+	if current_camera_mode == CameraMode.FIRST_PERSON:
 		spring_length = 0
 	elif current_camera_mode == CameraMode._3RD_PERSON:
 		spring_length = spring_length_last
