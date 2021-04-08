@@ -1,7 +1,7 @@
 class_name Engine
 extends Part
 
-var thrust_total = 30  #maximum thrust in Newtons
+export var thrust_total = 300  #maximum thrust in Newtons
 var thrust_percentage := 0.9
 var on := false
 var connected_tank
