@@ -5,13 +5,16 @@ var tank
 var engine
 var rcs
 var rcs2
+var camera
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	rocket = get_parent().get_node("Rocket")
 	tank = rocket.get_node("Tank")
 	engine = rocket.get_node("Engine")
 	rcs = rocket.get_node("RCS")
 	rcs2 = rocket.get_node("RCS2")
+	camera = tank.get_node("PersonCamera")
 	_link_parts()
 	
 func _link_parts():
@@ -29,6 +32,14 @@ func _link_parts():
 
 
 func _input(event):
+	
+	if event.is_action_pressed("ESC"):
+		change_mouse_mode()
+	
+	if event is InputEventMouse:
+		camera._input_pass_through(event)
+	
+	
 	if event.is_action_pressed("fire_engine"):
 		engine.toggle_engine()
 		print("fire_engine")
@@ -69,3 +80,10 @@ func _input(event):
 		rcs.fire_thrusters_global(Vector3.ZERO,1.0)
 		rcs2.fire_thrusters_global(Vector3.ZERO,1.0)
 		#print("rcs_reset")
+
+
+func change_mouse_mode():
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
