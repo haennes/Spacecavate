@@ -39,6 +39,8 @@ func _input(event):
 	if event is InputEventMouse:
 		camera._input_pass_through(event)
 	
+	if event.is_action_pressed("change_camera"):
+		camera.change_mode()
 	
 	if event.is_action_pressed("fire_engine"):
 		engine.toggle_engine()
