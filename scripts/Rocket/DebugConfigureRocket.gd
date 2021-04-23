@@ -1,5 +1,7 @@
 extends Camera
 
+var rcs_on = true
+
 var rocket
 var tank
 var engine
@@ -20,8 +22,8 @@ func _ready():
 func _link_parts():
 	rcs.scale_childs(Vector3(0.2,0.2,0.2))
 	rcs2.scale_childs(Vector3(0.2,0.2,0.2))
-	tank.add_fuel_auto(500,"Oxygen")
-	tank.add_fuel_auto(1000,"Hydrogen")
+	tank.add_fuel_auto(50000,"Oxygen")
+	tank.add_fuel_auto(100000,"Hydrogen")
 	tank.get_node("Joint").set_node_a(tank.get_path())
 	tank.get_node("Joint").set_node_b(engine.get_path())
 	rcs.get_node("Joint").set_node_a(rcs.get_path())
@@ -45,43 +47,58 @@ func _input(event):
 	if event.is_action_pressed("fire_engine"):
 		engine.toggle_engine()
 		print("fire_engine")
-		
-	if event.is_action_pressed("rcs_backward",true):
-		rcs.fire_thrusters_global(Vector3.BACK,1.0)
-		rcs2.fire_thrusters_global(Vector3.BACK,1.0)
-		print("rcs_backwards")
-		
-	elif event.is_action_pressed("rcs_forward",true):
-		rcs.fire_thrusters_global(Vector3.FORWARD,1.0)
-		rcs2.fire_thrusters_global(Vector3.FORWARD,1.0)
-		print("rcs_forwards")
-		
-		
-	elif event.is_action_pressed("rcs_left",true):
-		rcs.fire_thrusters_global(Vector3.LEFT,1.0)
-		rcs2.fire_thrusters_global(Vector3.RIGHT,1.0)
-		print("rcs_left")
-		
-		
-	elif event.is_action_pressed("rcs_right",true):
-		rcs.fire_thrusters_global(Vector3.RIGHT,1.0)
-		rcs2.fire_thrusters_global(Vector3.LEFT,1.0)
-		print("rcs_right")
-		
-	elif event.is_action_pressed("rcs_up",true):
-		rcs.fire_thrusters_global(Vector3.UP,1.0)
-		rcs2.fire_thrusters_global(Vector3.DOWN,1.0)
-		print("rcs_up")
 	
-	elif event.is_action_pressed("rcs_down",true):
-		rcs.fire_thrusters_global(Vector3.DOWN,1.0)
-		rcs2.fire_thrusters_global(Vector3.UP,1.0)
-		print("rcs_down")
+	if rcs_on:	
+		if event.is_action_pressed("rcs_backward",true):
+			rcs.fire_thrusters_global(Vector3.BACK,1.0)
+			rcs2.fire_thrusters_global(Vector3.BACK,1.0)
+			print("rcs_backwards")
+		
+		elif event.is_action_pressed("rcs_forward",true):
+			rcs.fire_thrusters_global(Vector3.FORWARD,1.0)
+			rcs2.fire_thrusters_global(Vector3.FORWARD,1.0)
+			print("rcs_forwards")
+		
+		
+		elif event.is_action_pressed("rcs_left",true):
+			rcs.fire_thrusters_global(Vector3.LEFT,1.0)
+			rcs2.fire_thrusters_global(Vector3.RIGHT,1.0)
+			print("rcs_left")
+		
+		
+		elif event.is_action_pressed("rcs_right",true):
+			rcs.fire_thrusters_global(Vector3.RIGHT,1.0)
+			rcs2.fire_thrusters_global(Vector3.LEFT,1.0)
+			print("rcs_right")
+		
+		elif event.is_action_pressed("rcs_up",true):
+			rcs.fire_thrusters_global(Vector3.UP,1.0)
+			rcs2.fire_thrusters_global(Vector3.DOWN,1.0)
+			print("rcs_up")
+		
+		elif event.is_action_pressed("rcs_down",true):
+			rcs.fire_thrusters_global(Vector3.DOWN,1.0)
+			rcs2.fire_thrusters_global(Vector3.UP,1.0)
+			print("rcs_down")
+	
+		else:
+			rcs.fire_thrusters_global(Vector3.ZERO,1.0)
+			rcs2.fire_thrusters_global(Vector3.ZERO,1.0)
+			#print("rcs_reset")
 	
 	else:
-		rcs.fire_thrusters_global(Vector3.ZERO,1.0)
-		rcs2.fire_thrusters_global(Vector3.ZERO,1.0)
-		#print("rcs_reset")
+		if event.is_action_pressed("pitch_forward",true):
+			engine.tilt_enine(Vector2(2.5,0))
+			print("pitch_forward")
+		elif event.is_action_pressed("pitch_backward",true):
+			engine.tilt_enine(Vector2(-2.5,0))
+		
+		if event.is_action_pressed("yaw_right",true):
+			engine.tilt_enine(Vector2(0,2.5))
+			
+		elif event.is_action_pressed("yaw_left",true):
+			engine.tilt_enine(Vector2(0,-2.5))
+
 
 
 func change_mouse_mode():

@@ -8,6 +8,8 @@
 
 [node name="Engine" type="RigidBody"]
 script = ExtResource( 1 )
+thrust_total = 20
+offset_node = NodePath("offset")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
