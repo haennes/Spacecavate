@@ -69,6 +69,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Spacecavate"
+run/main_scene="res://scenes/MainScene.tscn"
 config/icon="res://icon.png"
 config/version="0.1.0"
 
