@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/VehicleBuilder/VehicleBuilder.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Player/PersonCamera.tscn" type="PackedScene" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tree = NodePath("HSplitContainer/PanelLeft/PanelLeft/Tree")
+root_spatial = NodePath("HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport/Spatial")
+camera = NodePath("HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport/PersonCamera")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+split_offset = 500
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelLeft" type="VSplitContainer" parent="HSplitContainer"]
+margin_right = 500.0
+margin_bottom = 800.0
+split_offset = 600
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelLeft" type="Panel" parent="HSplitContainer/PanelLeft"]
+margin_right = 500.0
+margin_bottom = 800.0
+
+[node name="Tree" type="Tree" parent="HSplitContainer/PanelLeft/PanelLeft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+drop_mode_flags = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelBottom" type="Panel" parent="HSplitContainer/PanelLeft"]
+visible = false
+margin_top = 612.0
+margin_right = 500.0
+margin_bottom = 800.0
+
+[node name="Label2" type="Label" parent="HSplitContainer/PanelLeft/PanelBottom"]
+text = "Hello"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer"]
+margin_left = 512.0
+margin_right = 1600.0
+margin_bottom = 800.0
+split_offset = 700
+
+[node name="PanelMid" type="VSplitContainer" parent="HSplitContainer/HSplitContainer"]
+margin_right = 700.0
+margin_bottom = 800.0
+split_offset = 500
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelTop" type="Panel" parent="HSplitContainer/HSplitContainer/PanelMid"]
+margin_right = 700.0
+margin_bottom = 800.0
+
+[node name="ViewportContainer" type="ViewportContainer" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer"]
+size = Vector2( 700, 800 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Spatial" type="Spatial" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport"]
+
+[node name="PersonCamera" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+
+[node name="PanelBottom" type="Panel" parent="HSplitContainer/HSplitContainer/PanelMid"]
+visible = false
+margin_top = 512.0
+margin_right = 700.0
+margin_bottom = 800.0
+
+[node name="Label2" type="Label" parent="HSplitContainer/HSplitContainer/PanelMid/PanelBottom"]
+text = "Hello"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelRight" type="Panel" parent="HSplitContainer/HSplitContainer"]
+margin_left = 712.0
+margin_right = 1088.0
+margin_bottom = 800.0
+
+[node name="Label" type="Label" parent="HSplitContainer/HSplitContainer/PanelRight"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "hello
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
