@@ -4,3 +4,4 @@
 bin/
 export.cfg
 exportpresets.cfg
+*.import

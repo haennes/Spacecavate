@@ -29,7 +29,7 @@ func _add_fuel_unsafe(amount : int):
 
 	
 func consume_fuel(amount : int):
-	print("consumed fuel current fuel"+ current_fuel_name+ "amount:"+ String(current_fuel_amount))
+	#print("consumed fuel current fuel"+ current_fuel_name+ "amount:"+ String(current_fuel_amount))
 	if amount < 0:
 		return "amount smaller than 0, NOTE: you cant add fuel by that use add_fuel(amount,fuel_name) instead"
 	if amount > current_fuel_amount:

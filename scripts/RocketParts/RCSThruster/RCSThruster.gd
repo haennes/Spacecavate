@@ -1,8 +1,13 @@
 class_name RCSThruster
 extends Part
 
-var thruster_force = 10
+export var thruster_force = 10
 var fire_threshold = 0
+
+var disabled := false
+
+var connected_tank
+var current_config = [["Hydrogen",1]]
 
 var thruster_pos_x_percentage := 0.0 # +x
 var thruster_pos_y_percentage := 0.0 # +y
@@ -19,7 +24,7 @@ var thruster_pos_z
 func _ready():
 	_register_thrusters()
 
-func fire_thrusters_global(dir : Vector3, strength : float) -> void:
+func fire_thrusters_global(dir : Vector3, strength : float):
 	var dirnew = dir.rotated(Vector3(1,0,0),rotation.x)
 	dirnew = dirnew.rotated(Vector3(0,1,0),rotation.y)
 	dirnew = dirnew.rotated(Vector3(0,0,1),rotation.z)
@@ -27,7 +32,7 @@ func fire_thrusters_global(dir : Vector3, strength : float) -> void:
 	dirnew = dir
 	fire_thrusters(dir,strength)
 
-func fire_thrusters(dir : Vector3, strength : float)  -> void:
+func fire_thrusters(dir : Vector3, strength : float):
 	if dir == Vector3.ZERO:
 		thruster_pos_x_percentage = 0
 		thruster_pos_y_percentage = 0
@@ -59,10 +64,12 @@ func fire_thrusters(dir : Vector3, strength : float)  -> void:
 
 
 func _integrate_forces(state):
-	_integrate_thruster_forces(state)
+	_consume_fuel()
+	if !disabled:
+		_integrate_thruster_forces(state)
 	
 
-func _integrate_thruster_forces(state):
+func _integrate_thruster_forces(_state):
 	var thruster_pos_x_force = thruster_force * thruster_pos_x_percentage * thruster_pos_x.global_transform.basis.y.normalized()
 	var thruster_pos_y_force = thruster_force * thruster_pos_y_percentage * thruster_pos_y.global_transform.basis.y.normalized()
 	var thruster_neg_y_force = thruster_force * thruster_neg_y_percentage *thruster_neg_y.global_transform.basis.y.normalized()
@@ -89,3 +96,17 @@ func _register_thrusters():
 	thruster_neg_y = get_node("Thruster-y")
 	thruster_pos_z = get_node("Thruster+z")
 	thruster_neg_z = get_node("Thruster-z")
+
+func _consume_fuel():
+	var return_values = []
+	if connected_tank == null:
+		return
+	for i in current_config:
+		return_values.append(connected_tank.consume_fuel_auto(i[1]*thruster_pos_x_percentage,i[0]))
+	
+	var one_is_neg = false
+	for i in return_values:
+		if i < 0:
+			one_is_neg = true
+			break
+	disabled = one_is_neg
