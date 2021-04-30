@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/Player/3rdPersonCamera.gd" type="Script" id=1]
+
+[node name="PersonCamera" type="SpringArm"]
+transform = Transform( 1, -0.000510735, 0.000318044, 0.000510832, 1, -0.000278954, -0.00031789, 0.00027913, 1, 0, 0, 0 )
+spring_length = 20.0
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+far = 8192.0
