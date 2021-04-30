@@ -5,6 +5,7 @@ extends SpringArm
 enum CameraMode { FIRST_PERSON , _3RD_PERSON = 2 } # _ is needed other wise it gets confused
 
 var scroll_speed = 0.1 #move this to CameraData
+var mouse_sensitivity = Vector2(0.1,0.1)
 
 var spring_length_last = spring_length
 var current_camera_mode = CameraMode.FIRST_PERSON
@@ -36,8 +37,8 @@ func _input_pass_through(event : InputEventMouse):
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			rotation_degrees.x = clamp(rotation_degrees.x - event.relative.y*0.1,-90,90)
-			rotation_degrees.y -= event.relative.x*0.1
+			rotation_degrees.x = clamp(rotation_degrees.x - event.relative.y*mouse_sensitivity.y,-90,90)
+			rotation_degrees.y -= event.relative.x*mouse_sensitivity.x
 		else:
 			if event.is_action_pressed("scroll_in"):
 				spring_length -= scroll_speed
