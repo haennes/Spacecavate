@@ -39,7 +39,7 @@ func _consume_fuel():
 
 func _integrate_forces(state):
 	_integrate_engine_thrust(state)
-	add_central_force(Vector3.DOWN)
+	add_central_force(Vector3.DOWN*mass)
 	
 func connect_tank(tank):
 	connected_tank = tank
