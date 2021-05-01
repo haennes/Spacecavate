@@ -95,15 +95,15 @@ func _input(event):
 			rcs2.fire_thrusters_global(Vector3.DOWN,1.0)
 			print("rcs_up")
 
-	elif event.is_action_pressed("rcs_down",true):
-		rcs.fire_thrusters_global(Vector3.DOWN,1.0)
-		rcs2.fire_thrusters_global(Vector3.UP,1.0)
-		print("rcs_down")
+		elif event.is_action_pressed("rcs_down",true):
+			rcs.fire_thrusters_global(Vector3.DOWN,1.0)
+			rcs2.fire_thrusters_global(Vector3.UP,1.0)
+			print("rcs_down")
 		
-	else:
-		rcs.fire_thrusters_global(Vector3.ZERO,1.0)
-		rcs2.fire_thrusters_global(Vector3.ZERO,1.0)
-		#print("rcs_reset")
+		else:
+			rcs.fire_thrusters_global(Vector3.ZERO,1.0)
+			rcs2.fire_thrusters_global(Vector3.ZERO,1.0)
+			#print("rcs_reset")
 
 	
 	else:
@@ -126,7 +126,7 @@ func change_mouse_mode():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-    
+	
 func split_mesh(node, _mass : int):
 	var body = Part.new()
 	body.mass = _mass
