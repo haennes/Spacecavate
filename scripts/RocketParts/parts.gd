@@ -16,3 +16,9 @@ func scale_childs(scale : Vector3) -> void:
 		get_child(i).scale = scale
 		get_child(i).translation *= scale
 
+#func split_mesh(node, _mass : int):
+	#var body = Part.new()
+	#body.mass = _mass
+	#body.add_child(node)
+	#get_parrent().add_child(node)
+	
