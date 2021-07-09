@@ -36,36 +36,19 @@ custom_integrator = true
 script = ExtResource( 4 )
 affected_by_gravity = false
 
-[node name="MeshInstance" type="MeshInstance" parent="GravityObject"]
-transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
 
-[node name="Path" type="Path" parent="GravityObject"]
-curve = SubResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="GravityObject"]
-transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
-shape = SubResource( 3 )
-
-[node name="MultiMeshInstance" type="MultiMeshInstance" parent="GravityObject"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8491, 68.7231, 0 )
-multimesh = SubResource( 5 )
-
-[node name="GravityObject2" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 305.228, 0, 0 )
-mass = 10.0
-custom_integrator = true
-script = ExtResource( 4 )
-starting_velocity = Vector3( 0, 40, 0 )
+[node name="Rocket" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 57.5841, 13.0594 )
 
 [node name="Path" type="Path" parent="GravityObject2"]
 curve = SubResource( 2 )
+
 
 [node name="SoftBody" type="MeshInstance" parent="GravityObject2"]
 transform = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 mesh = SubResource( 6 )
 skeleton = NodePath("")
+
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="GravityObject2"]

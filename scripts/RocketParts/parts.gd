@@ -18,6 +18,7 @@ func scale_childs(scale : Vector3) -> void:
 		get_child(i).scale = scale
 		get_child(i).translation *= scale
 
+
 func rocket_add_force(force : Vector3 , offset : Vector3):
 	if force == Vector3.ZERO:
 		return
@@ -36,3 +37,10 @@ func move_collisonshapes_out():
 
 func get_pressure():
 	return 100000 # debug change this later pressure is always messured in pascal
+
+#func split_mesh(node, _mass : int):
+	#var body = Part.new()
+	#body.mass = _mass
+	#body.add_child(node)
+	#get_parrent().add_child(node)
+
