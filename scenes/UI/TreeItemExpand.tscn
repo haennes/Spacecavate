@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://scripts/VehicleBuilder/TreeItemExpand.gd" type="Script" id=2]
+
+[node name="TreeItemExpand" type="VBoxContainer"]
+margin_right = 376.0
+margin_bottom = 114.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 376.0
+margin_bottom = 20.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/AspectRatioContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+toggle_mode = true
+texture_normal = ExtResource( 1 )
+expand = true
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 24.0
+margin_top = 3.0
+margin_right = 87.0
+margin_bottom = 17.0
+text = "Categroy1"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_top = 24.0
+margin_right = 376.0
+margin_bottom = 24.0
+custom_constants/margin_left = 20
+
+[connection signal="toggled" from="HBoxContainer/AspectRatioContainer/TextureButton" to="." method="_on_ExpandButton_toggled"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/VehicleBuilder/Categorie.gd" type="Script" id=1]
+[ext_resource path="res://scenes/UI/TreeItemExpand.tscn" type="PackedScene" id=2]
+
+[node name="PanelContainer" type="PanelContainer"]
+margin_top = 32.0
+margin_right = 376.0
+margin_bottom = 174.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 369.0
+margin_bottom = 135.0
+script = ExtResource( 1 )
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 362.0
+margin_bottom = 36.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 355.0
+margin_bottom = 29.0
+alignment = 1
+
+[node name="Label" type="ToolButton" parent="VBoxContainer/PanelContainer/HBoxContainer2"]
+margin_right = 348.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Categorie"
+
+[node name="VBoxContainer" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 40.0
+margin_right = 362.0
+margin_bottom = 64.0
+
+[connection signal="toggled" from="VBoxContainer/PanelContainer/HBoxContainer2/Label" to="VBoxContainer" method="_on_Categorie_toggled"]

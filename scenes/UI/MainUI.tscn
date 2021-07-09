@@ -1,0 +1,665 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/UI/TreeItemExpand.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/UI/FlightUITab.gd" type="Script" id=2]
+[ext_resource path="res://scripts/UI/RocketUI.gd" type="Script" id=3]
+[ext_resource path="res://scripts/UI/UISubscripts/RocketStats.gd" type="Script" id=4]
+[ext_resource path="res://scripts/UI/UISubscripts/RotationIndicator.gd" type="Script" id=5]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="Environment" id=2]
+ambient_light_color = Color( 0.470588, 0.470588, 0.470588, 0.945098 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tab" type="Tabs" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 40.0
+drag_to_rearrange_enabled = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="VBoxContainer" parent="Tab"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Tab/Bottom"]
+margin_top = 808.0
+margin_right = 1600.0
+margin_bottom = 822.0
+text = "T+20:30.153"
+align = 1
+
+[node name="Label2" type="Label" parent="Tab/Bottom"]
+margin_top = 826.0
+margin_right = 1600.0
+margin_bottom = 840.0
+text = "min:sec"
+align = 1
+
+[node name="HUDRight" type="VBoxContainer" parent="Tab"]
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="VBoxContainer" parent="Tab/HUDRight"]
+margin_right = 200.0
+margin_bottom = 50.0
+grow_horizontal = 0
+rect_min_size = Vector2( 200, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Tab/HUDRight/Time"]
+margin_right = 200.0
+margin_bottom = 14.0
+text = "Time"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Tab/HUDRight/Time"]
+margin_top = 18.0
+margin_right = 200.0
+margin_bottom = 32.0
+text = "20:10:45.117"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Tab/HUDRight/Time"]
+margin_top = 36.0
+margin_right = 200.0
+margin_bottom = 50.0
+text = "2035"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Tab/HUDRight"]
+margin_top = 54.0
+margin_right = 200.0
+margin_bottom = 254.0
+rect_min_size = Vector2( 200, 200 )
+stretch = true
+script = ExtResource( 5 )
+
+[node name="Viewport" type="Viewport" parent="Tab/HUDRight/ViewportContainer"]
+size = Vector2( 200, 200 )
+size_override_stretch = true
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Spatial" type="Spatial" parent="Tab/HUDRight/ViewportContainer/Viewport"]
+
+[node name="MeshInstance" type="MeshInstance" parent="Tab/HUDRight/ViewportContainer/Viewport/Spatial"]
+transform = Transform( -0.056615, -0.298044, -0.847328, -0.125734, 0.84328, -0.288219, 0.889374, 0.100245, -0.0946852, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="Tab/HUDRight/ViewportContainer/Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.44784 )
+environment = SubResource( 2 )
+projection = 1
+current = true
+size = 4.74952
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tab/HUDRight"]
+margin_top = 258.0
+margin_right = 200.0
+margin_bottom = 644.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tab/HUDRight/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 386.0
+
+[node name="HSplitContainer" type="GridContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 50.0
+columns = 2
+script = ExtResource( 4 )
+
+[node name="Height" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/HSplitContainer"]
+margin_right = 54.0
+margin_bottom = 14.0
+text = "Height:"
+
+[node name="HeightNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/HSplitContainer"]
+margin_left = 58.0
+margin_right = 103.0
+margin_bottom = 14.0
+text = "1000m"
+
+[node name="velocity" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/HSplitContainer"]
+margin_top = 18.0
+margin_right = 54.0
+margin_bottom = 32.0
+text = "velocity:"
+
+[node name="velocityNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/HSplitContainer"]
+margin_left = 58.0
+margin_top = 18.0
+margin_right = 103.0
+margin_bottom = 32.0
+text = "50m/s"
+
+[node name="deltavleft" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/HSplitContainer"]
+margin_top = 36.0
+margin_right = 54.0
+margin_bottom = 50.0
+text = "deltav:"
+
+[node name="deltavleftNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/HSplitContainer"]
+margin_left = 58.0
+margin_top = 36.0
+margin_right = 103.0
+margin_bottom = 50.0
+text = "50m/s"
+
+[node name="Transfer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 54.0
+margin_right = 200.0
+margin_bottom = 128.0
+
+[node name="HBoxContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer" index="0"]
+margin_right = 200.0
+
+[node name="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/HBoxContainer" index="1"]
+margin_right = 75.0
+text = "Transfer"
+
+[node name="MarginContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer" index="1"]
+margin_right = 200.0
+margin_bottom = 74.0
+
+[node name="GridContainer" type="GridContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 200.0
+margin_bottom = 50.0
+columns = 2
+
+[node name="t-toNode" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/MarginContainer/GridContainer"]
+margin_right = 84.0
+margin_bottom = 14.0
+text = "Transfer:"
+
+[node name="t-toNodeNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_right = 129.0
+margin_bottom = 14.0
+text = "10s"
+
+[node name="t-tostartburn" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/MarginContainer/GridContainer"]
+margin_top = 18.0
+margin_right = 84.0
+margin_bottom = 32.0
+text = "start Transfer"
+
+[node name="t-tostartburn2" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 18.0
+margin_right = 129.0
+margin_bottom = 32.0
+text = "2s"
+
+[node name="deltavnode" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/MarginContainer/GridContainer"]
+margin_top = 36.0
+margin_right = 84.0
+margin_bottom = 50.0
+text = "deltavnode"
+
+[node name="deltavnodeNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 36.0
+margin_right = 129.0
+margin_bottom = 50.0
+text = "10m/s"
+
+[node name="Stages" parent="Tab/HUDRight/VBoxContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 132.0
+margin_right = 200.0
+margin_bottom = 386.0
+
+[node name="HBoxContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages" index="0"]
+margin_right = 200.0
+
+[node name="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/HBoxContainer" index="1"]
+margin_right = 65.0
+text = "Stages"
+
+[node name="MarginContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages" index="1"]
+margin_right = 200.0
+margin_bottom = 254.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 200.0
+margin_bottom = 230.0
+
+[node name="TreeItemExpand" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 180.0
+margin_bottom = 74.0
+
+[node name="HBoxContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand" index="0"]
+margin_right = 180.0
+
+[node name="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/HBoxContainer" index="1"]
+margin_right = 55.0
+text = "Main"
+
+[node name="detail" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/HBoxContainer" index="2"]
+margin_left = 59.0
+margin_top = 3.0
+margin_right = 87.0
+margin_bottom = 17.0
+text = "30%"
+
+[node name="MarginContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand" index="1"]
+margin_right = 180.0
+margin_bottom = 74.0
+
+[node name="GridContainer" type="GridContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 180.0
+margin_bottom = 50.0
+columns = 2
+
+[node name="deltav" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/MarginContainer/GridContainer"]
+margin_right = 39.0
+margin_bottom = 14.0
+text = "deltav"
+
+[node name="deltavNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_right = 84.0
+margin_bottom = 14.0
+text = "10m/s"
+
+[node name="Fuel" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/MarginContainer/GridContainer"]
+margin_top = 18.0
+margin_right = 39.0
+margin_bottom = 32.0
+text = "Fuel"
+
+[node name="FuelNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_top = 18.0
+margin_right = 84.0
+margin_bottom = 32.0
+text = "30%"
+
+[node name="FuelLiters" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/MarginContainer/GridContainer"]
+margin_top = 36.0
+margin_right = 39.0
+margin_bottom = 50.0
+text = "Fuel"
+percent_visible = 0.0
+
+[node name="FuelLitersNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_top = 36.0
+margin_right = 84.0
+margin_bottom = 50.0
+text = "100k l"
+
+[node name="TreeItemExpand2" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 78.0
+margin_right = 180.0
+margin_bottom = 152.0
+
+[node name="HBoxContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2" index="0"]
+margin_right = 180.0
+
+[node name="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/HBoxContainer" index="1"]
+margin_right = 48.0
+text = "2nd"
+
+[node name="detail" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/HBoxContainer" index="2"]
+margin_left = 52.0
+margin_top = 3.0
+margin_right = 88.0
+margin_bottom = 17.0
+text = "100%"
+
+[node name="MarginContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2" index="1"]
+margin_right = 180.0
+margin_bottom = 74.0
+
+[node name="GridContainer" type="GridContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 180.0
+margin_bottom = 50.0
+columns = 2
+
+[node name="deltav" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/MarginContainer/GridContainer"]
+margin_right = 39.0
+margin_bottom = 14.0
+text = "deltav"
+
+[node name="deltavNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_right = 84.0
+margin_bottom = 14.0
+text = "10m/s"
+
+[node name="Fuel" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/MarginContainer/GridContainer"]
+margin_top = 18.0
+margin_right = 39.0
+margin_bottom = 32.0
+text = "Fuel"
+
+[node name="FuelNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_top = 18.0
+margin_right = 84.0
+margin_bottom = 32.0
+text = "30%"
+
+[node name="FuelLiters" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/MarginContainer/GridContainer"]
+margin_top = 36.0
+margin_right = 39.0
+margin_bottom = 50.0
+text = "Fuel"
+percent_visible = 0.0
+
+[node name="FuelLitersNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_top = 36.0
+margin_right = 84.0
+margin_bottom = 50.0
+text = "100k l"
+
+[node name="TreeItemExpand3" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 156.0
+margin_right = 180.0
+margin_bottom = 230.0
+
+[node name="HBoxContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3" index="0"]
+margin_right = 180.0
+
+[node name="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/HBoxContainer" index="1"]
+margin_right = 67.0
+text = "Lander"
+
+[node name="detail" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/HBoxContainer" index="2"]
+margin_left = 71.0
+margin_top = 3.0
+margin_right = 107.0
+margin_bottom = 17.0
+text = "100%"
+
+[node name="MarginContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3" index="1"]
+margin_right = 180.0
+margin_bottom = 74.0
+
+[node name="GridContainer" type="GridContainer" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 180.0
+margin_bottom = 50.0
+columns = 2
+
+[node name="deltav" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/MarginContainer/GridContainer"]
+margin_right = 39.0
+margin_bottom = 14.0
+text = "deltav"
+
+[node name="deltavNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_right = 84.0
+margin_bottom = 14.0
+text = "10m/s"
+
+[node name="Fuel" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/MarginContainer/GridContainer"]
+margin_top = 18.0
+margin_right = 39.0
+margin_bottom = 32.0
+text = "Fuel"
+
+[node name="FuelNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_top = 18.0
+margin_right = 84.0
+margin_bottom = 32.0
+text = "30%"
+
+[node name="FuelLiters" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/MarginContainer/GridContainer"]
+margin_top = 36.0
+margin_right = 39.0
+margin_bottom = 50.0
+text = "Fuel"
+percent_visible = 0.0
+
+[node name="FuelLitersNumber" type="Label" parent="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3/MarginContainer/GridContainer"]
+margin_left = 43.0
+margin_top = 36.0
+margin_right = 84.0
+margin_bottom = 50.0
+text = "100k l"
+
+[node name="Tabs" type="VBoxContainer" parent="Tab"]
+anchor_right = 1.0
+margin_right = -200.0
+margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tab/Tabs"]
+margin_right = 1400.0
+margin_bottom = 20.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tab/Tabs/HBoxContainer"]
+margin_left = 200.0
+margin_right = 1200.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 1000, 0 )
+follow_focus = true
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tab/Tabs/HBoxContainer/ScrollContainer"]
+margin_right = 272.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="TextureButton" type="Button" parent="Tab/Tabs/HBoxContainer/ScrollContainer/HBoxContainer"]
+margin_right = 67.0
+margin_bottom = 20.0
+text = "Vehicle1"
+
+[node name="TextureButton2" type="Button" parent="Tab/Tabs/HBoxContainer/ScrollContainer/HBoxContainer"]
+margin_left = 71.0
+margin_right = 138.0
+margin_bottom = 20.0
+text = "Vehicle2"
+
+[node name="TextureButton3" type="Button" parent="Tab/Tabs/HBoxContainer/ScrollContainer/HBoxContainer"]
+margin_left = 142.0
+margin_right = 205.0
+margin_bottom = 20.0
+text = "Rocket1"
+
+[node name="TextureButton4" type="Button" parent="Tab/Tabs/HBoxContainer/ScrollContainer/HBoxContainer"]
+margin_left = 209.0
+margin_right = 272.0
+margin_bottom = 20.0
+text = "Rocket2"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="Tab/Tabs"]
+margin_top = 24.0
+margin_right = 1400.0
+margin_bottom = 56.0
+follow_focus = true
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tab/Tabs/ScrollContainer2"]
+margin_right = 1478.0
+margin_bottom = 20.0
+
+[node name="TextureButton" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_right = 67.0
+margin_bottom = 20.0
+text = "Vehicle1"
+
+[node name="TextureButton2" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 71.0
+margin_right = 138.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath("../TextureButton")
+focus_neighbour_right = NodePath("../TextureButton3")
+text = "Vehicle2"
+
+[node name="TextureButton3" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 142.0
+margin_right = 205.0
+margin_bottom = 20.0
+text = "Rocket1"
+
+[node name="TextureButton4" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 209.0
+margin_right = 272.0
+margin_bottom = 20.0
+text = "Rocket2"
+
+[node name="TextureButton5" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 276.0
+margin_right = 339.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton6" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 343.0
+margin_right = 406.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton7" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 410.0
+margin_right = 473.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton8" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 477.0
+margin_right = 540.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton9" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 544.0
+margin_right = 607.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton10" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 611.0
+margin_right = 674.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton11" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 678.0
+margin_right = 741.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton12" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 745.0
+margin_right = 808.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton13" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 812.0
+margin_right = 875.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton14" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 879.0
+margin_right = 942.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton15" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 946.0
+margin_right = 1009.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton16" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 1013.0
+margin_right = 1076.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton17" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 1080.0
+margin_right = 1143.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton18" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 1147.0
+margin_right = 1210.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton19" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 1214.0
+margin_right = 1277.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton20" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 1281.0
+margin_right = 1344.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton21" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 1348.0
+margin_right = 1411.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[node name="TextureButton22" type="Button" parent="Tab/Tabs/ScrollContainer2/HBoxContainer"]
+margin_left = 1415.0
+margin_right = 1478.0
+margin_bottom = 20.0
+text = "Rocket3"
+
+[editable path="Tab/HUDRight/VBoxContainer/VBoxContainer/Transfer"]
+[editable path="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages"]
+[editable path="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand"]
+[editable path="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand2"]
+[editable path="Tab/HUDRight/VBoxContainer/VBoxContainer/Stages/MarginContainer/VBoxContainer/TreeItemExpand3"]
