@@ -29,10 +29,10 @@ func fire_thrusters_global(dir : Vector3, strength : float):
 	dirnew = dirnew.rotated(Vector3(0,1,0),rotation.y)
 	dirnew = dirnew.rotated(Vector3(0,0,1),rotation.z)
 	dirnew = dirnew.normalized()
-	dirnew = dir
 	fire_thrusters(dir,strength)
 
 func fire_thrusters(dir : Vector3, strength : float):
+	print("fired thrusters dir: ",dir, "strength:",strength)
 	if dir == Vector3.ZERO:
 		thruster_pos_x_percentage = 0
 		thruster_pos_y_percentage = 0
@@ -63,10 +63,10 @@ func fire_thrusters(dir : Vector3, strength : float):
 			thruster_pos_x_percentage = dir.x * strength
 
 
-func _integrate_forces(state):
-	_consume_fuel()
-	if !disabled:
-		_integrate_thruster_forces(state)
+func _physics_process(delta):
+	if can_consume_fuel():
+		pass
+	_integrate_thruster_forces(delta)
 	
 
 func _integrate_thruster_forces(_state):
@@ -77,12 +77,12 @@ func _integrate_thruster_forces(_state):
 	var thruster_neg_z_force = thruster_force * thruster_neg_z_percentage *thruster_neg_z.global_transform.basis.y.normalized()
 
 	
-	#print(thruster_pos_x_force,thruster_pos_y_force, thruster_neg_y_force,thruster_pos_z_force,thruster_neg_z_force)
-	add_force(thruster_pos_x_force,thruster_pos_x.translation)
-	add_force(thruster_pos_y_force,thruster_pos_y.translation)
-	add_force(thruster_neg_y_force,thruster_neg_y.translation)
-	add_force(thruster_pos_z_force,thruster_pos_z.translation)
-	add_force(thruster_neg_z_force,thruster_neg_z.translation)
+	print(thruster_pos_x_force,thruster_pos_y_force, thruster_neg_y_force,thruster_pos_z_force,thruster_neg_z_force)
+	rocket_add_force(thruster_pos_x_force,thruster_pos_x.translation)
+	rocket_add_force(thruster_pos_y_force,thruster_pos_y.translation)
+	rocket_add_force(thruster_neg_y_force,thruster_neg_y.translation)
+	rocket_add_force(thruster_pos_z_force,thruster_pos_z.translation)
+	rocket_add_force(thruster_neg_z_force,thruster_neg_z.translation)
 	
 	get_node("Thruster+x3").emitting = bool(thruster_pos_x_percentage)
 	get_node("Thruster+y3").emitting = bool(thruster_pos_y_percentage)
@@ -91,13 +91,13 @@ func _integrate_thruster_forces(_state):
 	get_node("Thruster+z3").emitting = bool(thruster_neg_z_percentage)
 
 func _register_thrusters():
-	thruster_pos_x = get_node("Thruster+x")
-	thruster_pos_y = get_node("Thruster+y")
-	thruster_neg_y = get_node("Thruster-y")
-	thruster_pos_z = get_node("Thruster+z")
-	thruster_neg_z = get_node("Thruster-z")
+	thruster_pos_x = get_node("Thruster+x2")
+	thruster_pos_y = get_node("Thruster+y2")
+	thruster_neg_y = get_node("Thruster-y2")
+	thruster_pos_z = get_node("Thruster+z2")
+	thruster_neg_z = get_node("Thruster-z2")
 
-func _consume_fuel():
+func can_consume_fuel():
 	var return_values = []
 	if connected_tank == null:
 		return
@@ -109,4 +109,4 @@ func _consume_fuel():
 		if i < 0:
 			one_is_neg = true
 			break
-	disabled = one_is_neg
+	return one_is_neg

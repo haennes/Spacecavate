@@ -1,27 +1,53 @@
 class_name Rocket
-extends Spatial
+extends GravityObject
 
 # parts will be sorted into groups ie: superlargetank1 is in the "Tank" group
 export var ROCKET_NAME := "Untiteled"
-var velocity : Vector3 = Vector3.ZERO
-var posn : Vector3 = Vector3.ZERO  # the next position
-var position_array : Array = []
-export var starting_velocity := Vector3(0,0,0)
+var queued_forces = []
+var stages := []
+enum HEIGHT_MODE{TERRAIN,CENTER}
+
+signal velocity_changed(velocity)
+signal height_changed(height)
+signal deltav_changed(deltav_complete)
+signal name_changed(name) # add later might break things
+signal stage_property_change(property,new_value)
 
 ##### Declare this in an Autoload later   (from)
-
-var G := 6.0 # this is nonsense rn sorry
 var part_categories := ["Engine","Tank"] # and so on 
 
 ##### Declare this in an Autoload later   (to)
+func _process(delta):
+	emit_signal("velocity_changed",velocity)
+	emit_signal("height_changed",get_height(HEIGHT_MODE.CENTER)) # implement button to switch mode
+	emit_signal("deltav_changed",get_deltav())
 
-func _ready():
-	set_velocity(starting_velocity)
-	position_array.append(self.translation)
+func get_deltav():
+	for i in stages:
+		pass
+	return 0
 
 
-func set_velocity(_velocity : Vector3) -> void:
-	velocity = _velocity
+func get_height(mode):
+	if mode == HEIGHT_MODE.CENTER:
+		self.global_translation.distance_to(get_nearest_planet_distance())
+
+func get_nearest_planet_distance():
+	var planets_positions:=[]
+	for i in get_tree().get_nodes_in_group("Planet"):
+		planets_positions.append(i.global_translation.distance_to(self.global_translation))
+	print("planetdistances_not_sorted",planets_positions)
+	planets_positions.sort()
+	print("planetdistances_yes_sorted",planets_positions)
+
+func _integrate_forces(state):
+	_integrate_queued_forces(state)
+
+func _integrate_queued_forces(state):
+	for i in queued_forces:
+		add_force(i[0],i[1])
+		print("added force rocket")
+	queued_forces = []
 
 func _register_all_parts():
 	for i in part_categories.size():
@@ -41,27 +67,5 @@ func _register_all_parts_from_category(part_category : String, node):
 	for child in node.get_children():
 		_register_all_parts_from_category(part_category, child)
 
-func calculate_next_position(delta : float) -> void:
-	var stringToPrint : String = ""
-	var acceleration = Vector3.ZERO
-	var gravity_objects = get_tree().get_nodes_in_group("gravity_objects")
-	for x in gravity_objects.size():
-		var gravity_object : RigidBody = gravity_objects[x]
-		if gravity_object == self:
-			continue
-		var direction = position_array[-1].direction_to(gravity_object.position_array[-1])
-		var squaredistance = position_array[-1].distance_squared_to(gravity_object.position_array[-1])
-		stringToPrint += "dir: " + String(direction) + "squaredistance: " + String(squaredistance)
-		acceleration += direction*G*gravity_object.mass / squaredistance
-	velocity += acceleration * delta
-	posn = position_array[-1] + velocity * delta
-	stringToPrint += "acceleration: " + String(acceleration) + "posn: " + String(posn) + "lastpos: " + String(position_array[-1]) + "pos_array_lenght" + String(position_array.size())
-	#print(stringToPrint)
-	
-func update_posarray(i : int) -> void:
-	print("update_posarray() called")
-	position_array.append(posn)
-	$Path.curve.add_point(posn)
-#	var multimeshinstance = get_parent().get_node("MultiMeshInstance")
-#	var trans = Transform(Basis(Vector3.UP,0),posn)
-#	multimeshinstance.multimesh.set_instance_transform(i,trans)
+func queue_force(force : Vector3, offset : Vector3):
+	queued_forces.append([force,offset])

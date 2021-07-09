@@ -44,16 +44,24 @@ func _consume_fuel_unsafe(amount : int):
 
 
 func can_hold_fuel(fuel_name : String):
-	return fuel_name in possible_fuels
+	if fuel_name in possible_fuels:
+		return true
+	return false
 
 func can_currently_hold_fuel(fuel_name : String):
 	return can_hold_fuel(fuel_name) and (get_current_fuel() == "" or get_current_fuel() == fuel_name)
+
+func can_consume_fuel(amount) -> bool:
+	return amount >= current_fuel_amount
 
 func get_possible_fuels():
 	return possible_fuels
 
 func get_current_fuel():
 	return current_fuel_name
+	
+func get_current_fuel_mass():
+	return current_fuel_name * 10 # replace as soon as the Autoload for fuel is added
 
 func set_current_fuel(name: String):
 	if can_hold_fuel(name):
@@ -78,3 +86,10 @@ static func get_biggest_tank(tanks_array):
 		if current_max.max_capacity < i.max_capacity:
 			current_max = i
 	return current_max
+	
+static func get_drainable_tanks(tanks_array,fuel_name : String):
+	var drainable_tanks = []
+	for i in tanks_array:
+		if i.get_current_rules() == fuel_name:
+			drainable_tanks.append(i)
+	return drainable_tanks
