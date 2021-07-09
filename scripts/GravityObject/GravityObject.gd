@@ -33,12 +33,14 @@ func _ready():
 
 
 func _integrate_forces(state) -> void :
+	#print("test")
 	_integrate_gravity(state)
 
 
 func set_velocity(velocity : Vector3) -> void :
-	apply_central_impulse(mass*velocity)
-	self.velocity = velocity
+	#self.velocity = velocity
+	apply_central_impulse(velocity*mass)
+	pass
 
 
 func _physics_process(delta):
@@ -57,7 +59,11 @@ func _integrate_gravity(state) -> void :
 			var squaredistance = translation.distance_squared_to(gravity_object.translation)
 			force += direction * G * gravity_object.mass * mass / squaredistance
 			#print("x : %s dir : %s squaredistance : %s force : %s" % [x, direction, squaredistance, force])
-		add_central_force(force)
+		#print("force",force)
+		if is_in_group("Rocket"):
+			rocket_add_central_force(force)
+		else:
+			add_central_force(force)
 
 
 
@@ -81,13 +87,13 @@ func calculate_next_position(delta : float) -> void:
 
 
 func update_posarray(i : int) -> void:
-	print("update_posarray() called" + name)
+	#print("update_posarray() called" + name)
 	if mode != MODE_STATIC:
 		position_array.append(posn)
 		
 		$Path.curve.add_point(posn)
 		
-		var multimeshinstance = get_parent().get_node("MultiMeshInstance")
+		var multimeshinstance = get_node("MultiMeshInstance")
 		var trans = Transform(Basis(Vector3.UP,0),posn)
 		multimeshinstance.multimesh.set_instance_transform(i,trans)
 		
@@ -99,3 +105,6 @@ func is_closed(pos1 : Vector3, pos2 : Vector3, pos_to_check : Vector3 , distance
 		var distance_postocheck_pos2 = pos_to_check.distance_to(pos2)   #distance3
 		if distance_postochek_pos1 <= distance_pos1_pos2 + distance_threshold && distance_postocheck_pos2 <= distance_pos1_pos2 + distance_threshold:
 			return true
+
+func rocket_add_central_force(force : Vector3):
+	pass

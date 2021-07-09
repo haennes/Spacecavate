@@ -12,6 +12,8 @@ func _physics_process(delta):
 		for b in gravity_emitters.size():
 			gravity_emitters[b].update_posarray(i)
 	for b in gravity_emitters.size():
+		#gravity_emitters[b].set_mass(10000000)
+		#print(gravity_emitters[b].mass)
 		var curve : Curve3D = gravity_emitters[b].get_node("Path").curve
 		var pointsarray = []
 		for point in curve.get_point_count():

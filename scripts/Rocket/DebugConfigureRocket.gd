@@ -9,6 +9,12 @@ var rcs
 var rcs2
 var camera
 
+func _process(delta):
+	get_parent().get_node("Control/Label2").text = String(engine.on)
+	get_parent().get_node("Control/Label5").text = String(tank.tanks[0].current_fuel_amount)
+	get_parent().get_node("Control/Label6").text = String(tank.tanks[1].current_fuel_amount)
+	pass
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	rocket = get_parent().get_node("Rocket")
@@ -16,24 +22,29 @@ func _ready():
 	engine = rocket.get_node("Engine")
 	rcs = rocket.get_node("RCS")
 	rcs2 = rocket.get_node("RCS2")
-	camera = tank.get_node("PersonCamera")
-	_link_parts()
-	
-func _link_parts():
+	camera = rocket.get_node("PersonCamera")
 	rcs.scale_childs(Vector3(0.2,0.2,0.2))
 	rcs2.scale_childs(Vector3(0.2,0.2,0.2))
-	tank.add_fuel_auto(50000,"Oxygen")
-	tank.add_fuel_auto(100000,"Hydrogen")
+	#get_parent().get_node("GravityObject").mass = 1000000
+	#_link_parts()
+	
+func _link_parts():
 	tank.get_node("Joint").set_node_a(tank.get_path())
 	tank.get_node("Joint").set_node_b(engine.get_path())
 	rcs.get_node("Joint").set_node_a(rcs.get_path())
-	rcs.get_node("Joint").set_node_b(engine.get_path())
+	rcs.get_node("Joint").set_node_b(tank.get_path())
 	rcs2.get_node("Joint").set_node_a(rcs2.get_path())
-	rcs2.get_node("Joint").set_node_b(engine.get_path())
+	rcs2.get_node("Joint").set_node_b(tank.get_path())
 	rocket.get_node("Engine").connected_tank = tank
 
 
 func _input(event):
+	#print("INPUT")
+	if event.is_action_pressed("add_fuel_debug"):
+		print("added fuel")
+		tank.add_fuel_auto(50000,"Oxygen")
+		tank.add_fuel_auto(100000,"Hydrogen")
+		
 	
 	if event.is_action_pressed("ESC"):
 		change_mouse_mode()
