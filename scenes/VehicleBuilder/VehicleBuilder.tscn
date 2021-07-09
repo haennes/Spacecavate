@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/VehicleBuilder/VehicleBuilder.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Player/PersonCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/VehicleBuilder/PanelRight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/VehicleBuilder/PanelMid.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/VehicleBuilder/PanelLeft.tscn" type="PackedScene" id=5]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -10,9 +13,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-tree = NodePath("HSplitContainer/PanelLeft/PanelLeft/Tree")
+tree = NodePath("HSplitContainer/PanelLeft/PanelLeft/VBoxContainer/Tree")
 root_spatial = NodePath("HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport/Spatial")
 camera = NodePath("HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport/PersonCamera")
+eye_texture = ExtResource( 3 )
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 anchor_right = 1.0
@@ -22,37 +26,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelLeft" type="VSplitContainer" parent="HSplitContainer"]
-margin_right = 500.0
-margin_bottom = 800.0
-split_offset = 600
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelLeft" type="Panel" parent="HSplitContainer/PanelLeft"]
-margin_right = 500.0
-margin_bottom = 800.0
-
-[node name="Tree" type="Tree" parent="HSplitContainer/PanelLeft/PanelLeft"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-drop_mode_flags = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelBottom" type="Panel" parent="HSplitContainer/PanelLeft"]
-visible = false
-margin_top = 612.0
-margin_right = 500.0
-margin_bottom = 800.0
-
-[node name="Label2" type="Label" parent="HSplitContainer/PanelLeft/PanelBottom"]
-text = "Hello"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PanelLeft" parent="HSplitContainer" instance=ExtResource( 5 )]
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer"]
 margin_left = 512.0
@@ -60,57 +34,22 @@ margin_right = 1600.0
 margin_bottom = 800.0
 split_offset = 700
 
-[node name="PanelMid" type="VSplitContainer" parent="HSplitContainer/HSplitContainer"]
-margin_right = 700.0
-margin_bottom = 800.0
-split_offset = 500
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PanelMid" parent="HSplitContainer/HSplitContainer" instance=ExtResource( 4 )]
 
-[node name="PanelTop" type="Panel" parent="HSplitContainer/HSplitContainer/PanelMid"]
-margin_right = 700.0
-margin_bottom = 800.0
+[node name="PanelRight" parent="HSplitContainer/HSplitContainer" instance=ExtResource( 2 )]
 
-[node name="ViewportContainer" type="ViewportContainer" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="WindowDialog" type="FileDialog" parent="."]
+margin_right = 315.0
+margin_bottom = 130.0
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 1
+filters = PoolStringArray( "*.tscn ; Scene" )
+current_dir = "user://Parts"
+current_path = "user://Parts/"
 
-[node name="Viewport" type="Viewport" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer"]
-size = Vector2( 700, 800 )
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="Spatial" type="Spatial" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport"]
-
-[node name="PersonCamera" parent="HSplitContainer/HSplitContainer/PanelMid/PanelTop/ViewportContainer/Viewport" instance=ExtResource( 2 )]
-
-[node name="PanelBottom" type="Panel" parent="HSplitContainer/HSplitContainer/PanelMid"]
-visible = false
-margin_top = 512.0
-margin_right = 700.0
-margin_bottom = 800.0
-
-[node name="Label2" type="Label" parent="HSplitContainer/HSplitContainer/PanelMid/PanelBottom"]
-text = "Hello"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelRight" type="Panel" parent="HSplitContainer/HSplitContainer"]
-margin_left = 712.0
-margin_right = 1088.0
-margin_bottom = 800.0
-
-[node name="Label" type="Label" parent="HSplitContainer/HSplitContainer/PanelRight"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "hello
-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[connection signal="Tree_button_pressed" from="HSplitContainer/PanelLeft" to="." method="_on_PanelLeft_Tree_button_pressed"]
+[connection signal="Tree_item_selected" from="HSplitContainer/PanelLeft" to="." method="_on_Tree_item_selected"]
+[connection signal="add_part" from="HSplitContainer/PanelLeft" to="." method="_on_PanelLeft_add_part"]
+[connection signal="file_selected" from="WindowDialog" to="." method="_on_FileDialog_file_selected"]

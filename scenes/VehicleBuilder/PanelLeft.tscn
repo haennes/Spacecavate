@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/VehicleBuilder/PanelLeft.gd" type="Script" id=1]
+
+[node name="PanelLeft" type="VSplitContainer"]
+margin_right = 500.0
+margin_bottom = 800.0
+split_offset = 600
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelLeft" type="Panel" parent="."]
+margin_right = 500.0
+margin_bottom = 800.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelLeft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelLeft/VBoxContainer"]
+margin_right = 500.0
+margin_bottom = 24.0
+
+[node name="AddPartButton" type="Button" parent="PanelLeft/VBoxContainer/HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 24.0
+toggle_mode = true
+text = "+"
+
+[node name="LineEdit" type="LineEdit" parent="PanelLeft/VBoxContainer/HBoxContainer"]
+margin_left = 24.0
+margin_right = 448.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Search through Parts"
+
+[node name="ToolButton" type="ToolButton" parent="PanelLeft/VBoxContainer/HBoxContainer"]
+margin_left = 452.0
+margin_right = 500.0
+margin_bottom = 24.0
+text = "script"
+
+[node name="Tree" type="Tree" parent="PanelLeft/VBoxContainer"]
+margin_top = 28.0
+margin_right = 500.0
+margin_bottom = 800.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+drop_mode_flags = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelBottom" type="Panel" parent="."]
+visible = false
+margin_top = 612.0
+margin_right = 500.0
+margin_bottom = 800.0
+
+[node name="Label2" type="Label" parent="PanelBottom"]
+text = "Hello"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="toggled" from="PanelLeft/VBoxContainer/HBoxContainer/AddPartButton" to="." method="_on_AddPartButton_toggled"]
+[connection signal="button_pressed" from="PanelLeft/VBoxContainer/Tree" to="." method="_on_Tree_button_pressed"]
+[connection signal="item_selected" from="PanelLeft/VBoxContainer/Tree" to="." method="_on_Tree_item_selected"]
